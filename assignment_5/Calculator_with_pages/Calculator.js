@@ -1,0 +1,66 @@
+import { useState } from 'react';
+import { StyleSheet, View, Text, TextInput, Button } from 'react-native'
+
+export default function Calculator({navigation}) {
+
+  const[number1, setNumber1] = useState(0)
+  const[number2, setNumber2] = useState(0)
+  const[sum, setSum] = useState(0)
+  const [data, setData] = useState([])
+
+  const addNumber = () => {
+    const result = Number(number1) + Number(number2)
+    setSum(result)
+    setData([...data, { operation: `${number1} + ${number2}`, result }])
+  }
+
+  const minusNumber = () => {
+    const result = Number(number1) - Number(number2)
+    setSum(result)
+    setData([...data, { operation: `${number1} - ${number2}`, result }])
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text>Result: {sum}</Text>
+      <TextInput 
+        style={{ width: 200, borderColor:'gray', borderWidth: 1 }}
+        value={number1.toString()}
+        onChangeText={number1 => setNumber1(number1.toString())}
+      >
+      </TextInput>
+      <TextInput
+        style={{ width: 200, borderColor:'gray', borderWidth: 1 }}
+        value={number2.toString()}
+        onChangeText={number2 => setNumber2(number2.toString())}
+      >
+      </TextInput>
+      <View style={styles.buttonView}>
+        <Button 
+          title="+" 
+          onPress={addNumber} 
+        />
+        <Button 
+          title="-" 
+          onPress={minusNumber} 
+        />
+        <Button 
+          title="HISTORY" 
+          onPress={() => navigation.navigate('History', { data })} 
+        />
+      </View>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      marginTop: 150
+    },
+    buttonView: {
+      flexDirection: 'row'
+    },
+})
