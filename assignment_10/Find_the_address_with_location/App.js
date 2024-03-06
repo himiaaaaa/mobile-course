@@ -63,15 +63,15 @@ export default function App() {
       <MapView
         style={{ flex: 6 }}
         region={{
-          latitude: lat? lat : location.coords.latitude,
-          longitude: lon? lon : location.coords.longitude,
+          latitude: lat? lat : location?.coords?.latitude,
+          longitude: lon? lon : location?.coords?.longitude,
           latitudeDelta: 0.0322,
           longitudeDelta: 0.0221,
         }}>
         <Marker
           coordinate={{
-          latitude: lat? lat : location.coords.latitude,
-          longitude: lon? lon : location.coords.longitude
+          latitude: lat? lat : location?.coords?.latitude,
+          longitude: lon? lon : location?.coords?.longitude
           }}
           title={simplifyAddress(title)} />
       </MapView>
